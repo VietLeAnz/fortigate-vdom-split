@@ -12,16 +12,16 @@ import sys, getopt
 # output_dir = 'D:\\Extracts\\SF\\'
 # suffix_txt = '-sfda.txt'
 
-backup_file = 'D:\\Extracts\\sfda18-fw01-cl01_20211129_1050.conf'
-output_dir = 'D:\\Extracts\\SF\\'
-suffix_txt = '-sf.txt'
+backup_file = 'D:\\Extracts\\Latest-melbourne-fw01-_20211129_1047.conf'
+output_dir = 'D:\\Extracts\\MEL\\'
+suffix_txt = '-mel.txt'
 
 
 def usage():
     """ Used to print Syntax
     """
-    print("Syntax:\n\t{} -i <inputfile> -o <output_folder>".format(os.path.basename(__file__)))
-    print("Examples:\n\t{} -i backup-config.conf -o OUT\\".format(os.path.basename(__file__)))
+    print("Syntax:\n\t{} -i <inputfile> -o <output_folder> -s <suffix>".format(os.path.basename(__file__)))
+    print("Examples:\n\t{} -i backup-config.conf -o OUT\\ -s -new.txt".format(os.path.basename(__file__)))
 
 def extract_interfaces():
     """ Used to extract interfaces for each vdom
@@ -79,9 +79,10 @@ def extract_interfaces():
 def main(argv):
     global backup_file
     global output_dir
+    global suffix_txt
 
     try:
-        opts, args = getopt.getopt(argv, "hi:o:", ["ifile=", "odir="])
+        opts, args = getopt.getopt(argv, "hi:o:s:", ["ifile=", "odir=", "suffix="])
     except getopt.GetoptError:
         print("Error:\n\tInvalid commands")
         usage()
@@ -94,6 +95,8 @@ def main(argv):
             backup_file = arg
         elif opt in ("-o", "--odir"):
             output_dir = arg
+        elif opt in ("-s", "--suffix"):
+            suffix_txt = arg
 
 if __name__ == "__main__":
     main(sys.argv[1:])
